@@ -1,8 +1,6 @@
 # nodepop
 App de anuncios con nodejs, express y mongodb.
 
-# Practica Node - Nodepop API
-
 ## Puesta en marcha
 Clonar el repo y a continuación seguir los pasos:
 
