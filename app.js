@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+const customError = require('./lib/customError');
+
 // Middlewares
 require('./lib/connectMongoose'); // Conexión con Mongoose
 require('./models/Anuncio'); // Modelo de anuncios
@@ -36,9 +38,10 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use( customError, function(err, req, res, next) {
     res.status(err.status || 500);
     if (isAPI(req)) { // llamada de AIP, devuelvo JSON
+        // llamamos a la función que modifica el mensaje
         return res.json({success:false, error: err.message});
     }
     // set locals, only providing error in development

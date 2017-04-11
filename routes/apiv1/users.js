@@ -25,19 +25,32 @@ router.post('/authenticate', function (req, res, next) {
     // buscamos en la base de datos
     usuario.findOne({email: email}).exec(function (err, user) {
         if (err){
+            err.message = new Error('INTERNAL SERVER ERROR');
+            err.status = 500;
             return next(err); // Aquí hay que manejar el error.
         }
         if (!user) {
+            err = new Error('INVALID CREDENTIALS');
+            err.status = 401;
+            return next(err);
             // Si no se encuentra el usuario
-            res.json({success: false, error: 'Usuario no encontrado'});
+            //res.json({success: false, error: 'Usuario no encontrado'});
         }
 
         // Si encontramos al usuario comprobamos su password
         user.comparePassword(clave, function (err, isMatch) {
-            if (err) return next(err);
-            console.log(clave);
+            if (err) {
+                err = new Error('INTERNAL SERVER ERROR');
+                err.status = 500;
+                return next(err);
+                //return next(err);
+            }
+            //console.log(clave);
             if (!isMatch) {
-                return res.json({success: false, error: 'Clave incorrecta'});
+                err = new Error('INVALID CREDENTIALS');
+                err.status = 401;
+                return next(err);
+                //return res.json({success: false, error: 'Clave incorrecta'});
             }
             jwt.sign({user_id: user._id}, localConfig.jwt.secret,{
                 expiresIn: localConfig.jwt.expiresIn
@@ -61,11 +74,15 @@ router.post('/', function (req, res, next) {
     // Ya tenemos al usuario
     usuario.findOne({email: u.email}, function (err, user) {
         if (err) {
-            return res.json({success: false, error: 'Error en la base de datos'});
-
+            err = new Error('BBDD ERROR');
+            err.status = 500;
+            return next(err);
+            //return res.json({success: false, error: 'Error en la base de datos'});
         }
         if (user) {
-            return res.json({success: false, error: 'Usuario ya existe'});
+            err = new Error('EMAIL ALREADY EXISTS');
+            err.status = 401;
+            return next(err);
         } else {
             //  si no hay usuario significa que no existe
             console.log('No existe');

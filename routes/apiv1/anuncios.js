@@ -18,9 +18,11 @@ router.get('/tags', function (req, res) {
     query.select('tags');
 
     query.exec(function(err, rows) {
-        /*if (err) {
-         return customError(req, res, 'INTERNAL_ERROR', 500);
-         }*/
+        if (err) {
+            err = new Error('INTERNAL SERVER ERROR');
+            err.status = 500;
+            return next(err);
+        }
 
         const tags = [];
         rows.forEach((row) => {
@@ -79,7 +81,8 @@ router.get('/',jwtAuth ,function(req, res, next) {
 
     anuncio.list(filter, limit, skip, sort, function (err, rows) {
         if (err){
-            //Devolvemos el error para que lo maneje express
+            err = new Error('INTERNAL SERVER ERROR');
+            err.status = 500;
             return next(err);
         }
         res.json({success: true, result: rows});

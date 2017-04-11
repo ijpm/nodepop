@@ -1,0 +1,27 @@
+{
+  "ES": {
+    "INTERNAL SERVER ERROR": "Error interno del servidor",
+    "BBDD ERROR": "Error en la base de datos",
+    "NOT FOUND": "No encontrado.",
+    "EMAIL ALREADY EXISTS": "Email ya existe.",
+    "INVALID DATA": "Datos no válidos.",
+    "INVALID CREDENTIALS": "Credenciales no válidas.",
+    "NO TOKEN PROVIDED": "Tóken no provisto.",
+    "TOKEN EXPIRED": "Tóken expirado.",
+    "INVALID TOKEN": "Tóken no válido.",
+    "CAST ERROR": "Error en la conversión de datos"
+
+  },
+  "EN": {
+    "INTERNAL SERVER ERROR": "Internal server error",
+    "BBDD ERROR": "Data Base Error",
+    "NOT FOUND": "Not found.",
+    "EMAIL ALREADY EXISTS": "Email already exists.",
+    "INVALID DATA": "Invalid data.",
+    "INVALID CREDENTIALS": "Invalid credentials.",
+    "NO TOKEN PROVIDED": "No token provided.",
+    "TOKEN EXPIRED": "Token expired.",
+    "INVALID TOKEN": "Invalid token.",
+    "CAST ERROR": "Data cast failed"
+  }
+}
