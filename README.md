@@ -1,6 +1,10 @@
 # nodepop
 App de anuncios con nodejs, express y mongodb.
 
+# Desplegada en:
+
+http://ec2-34-200-11-69.compute-1.amazonaws.com/
+
 ## Puesta en marcha
 Clonar el repo y a continuación seguir los pasos:
 
